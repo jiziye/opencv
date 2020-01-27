@@ -1,0 +1,3 @@
+/home/mynt/Desktop/L4/StereoDisparity/buildc/CMakeFiles/edit_cache.dir
+/home/mynt/Desktop/L4/StereoDisparity/buildc/CMakeFiles/rebuild_cache.dir
+/home/mynt/Desktop/L4/StereoDisparity/buildc/CMakeFiles/StereoDisparity.dir
