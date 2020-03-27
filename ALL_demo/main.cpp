@@ -3,7 +3,7 @@
 #include<opencv2/opencv.hpp>
 #include<opencv2/highgui/highgui.hpp>
 #include<opencv2/imgproc/imgproc.hpp>
-#include<opencv2/legacy/legacy.hpp>
+//#include<opencv2/legacy/legacy.hpp>
 #include<opencv2/ml/ml.hpp>
 
 using namespace cv;
@@ -275,6 +275,15 @@ int main(int argc, char** argv)
     // example(acWelcome);
     // cout<<"%%%%%%"<<sizeof(acWelcome)<<endl;
    
+   VideoCapture cap(0);
+    //Mat video_image;
+    while(char(waitKey(1))!= 'q')
+    {   
+        Mat video_image;
+        cap >> video_image;
+        imshow("video",video_image);
+    }
+
 #endif
     waitKey(0);
     return 0;
