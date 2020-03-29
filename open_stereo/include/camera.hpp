@@ -19,7 +19,7 @@ class Camera{
 #ifdef USE_OPENNI
             use_openni_(index == cv::CAP_OPENNI || index == cv::CAP_OPENNI2),
 #endif
-            fps_(-1){            {
+            fps_(-1){            
                 int flag = 0;
 #ifdef USE_OPENNI
             if(use_openni_){
@@ -144,11 +144,12 @@ class Camera{
                 int baseline = 0;
                 cv::Size textSize = cv::getTextSize(text,cv::FONT_HERSHEY_PLAIN,1,1,&baseline);
 
-                cv::putText(img,text,cv::Point(w-5-textSize.width, 5+textSize.height),cv::FONT_HERSHEY_PLAIN,1,cv::Scalar(255,0,255));
+                cv::putText(im,text,cv::Point(w-5-textSize.width, 5+textSize.height),
+                cv::FONT_HERSHEY_PLAIN,1,cv::Scalar(255,0,255));
             }
         }
 
-    }
+    
 
 private:
     std::unique_ptr<VideoCapture> cap_;
@@ -158,3 +159,5 @@ private:
     double fps_;
     
 };
+
+#endif 
