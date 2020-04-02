@@ -1,7 +1,13 @@
+1.use open_mynteye shoot some carlibration target pictures
+2.move this picutures to calibration/imagelist_creator_build
+3.make and use imagelist_creator to generate imagelist.yaml 
+$ ./imagelist_creator imagelist.yaml 1.png 2.png 3.png 4.png 5.png 6.png 7.png 8.png 9.png 10.png 11.png 12.png 13.png 14.png 15.png 
+4.move imagelist.yaml and calibration target pictures to calibration/build
+5.use calibration  to generate camera.yaml
+$ ./calibration -w=6 -h=8 -s=2 -n=10 -o=camera.yml -op -oe imagelist.xml
 
+可以直接使用Opencv自带的摄像机标定示例程序，该程序位于 “\OpenCV\samples\c目录下的calibration.cpp”，程序的输入支持直接从USB摄像机读取图片标定，或者读取avi文件或者已经存放于电脑上图片进行标定。
 
-读者可以直接使用Opencv自带的摄像机标定示例程序，该程序位于 “\OpenCV\samples\c目录下的calibration.cpp”，程序的输入支持直接从USB摄像机读取图片标定，或者读取avi文件或者已经存放于电脑上图片进行标定。
-[编辑]
 使用说明
 
 编译运行程序，如果未设置任何命令行参数，则程序会有提示，告诉你应该在你编译出来的程序添加必要的命令行，比如你的程序是calibration.exe(以windows操作系统为例）。则你可以添加如下命令行（以下加粗的字体所示）：
@@ -42,7 +48,7 @@ Usage: calibration
     经多次使用发现，不指定 -p参数时计算的结果误差较大，主要表现在对u0,v0的估计误差较大，因此建议使用时加上-p参数
 
 
-[编辑]
+
 list_of_views.yaml
 
 该yaml文件表示的是你在电脑上面需要用以标定的图片列表。
@@ -72,7 +78,7 @@ Win+R打开运行，输入“cmd”回车，进入命令行窗口，找到...\im
 
 
 
-[编辑]
+
 输入为摄像机或者avi文件时
 
         "When the live video from camera is used as input, the following hot-keys may be used:\n"
@@ -83,3 +89,19 @@ Win+R打开运行，输入“cmd”回车，进入命令行窗口，找到...\im
 
 
 请直接复制 calibration.cpp 中的相关代码。 
+
+
+cannot find #include "opencv2/imgcodecs.hpp"
+
+$pkg-config --modversion opencv
+2.4.13.2
+$cd /opt/ros/kinetic/include/opencv-3.3.1-dev/
+$pwd
+/opt/ros/kinetic/include/opencv-3.3.1-dev
+
+use this path to configure C++ configurations
+C/C++:edit configurations (UI)
+Include path 
+add path
+
+

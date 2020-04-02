@@ -10,13 +10,13 @@ using namespace std;
 
 int main()
 {
-        Mat src = imread("1.png");
+        Mat src = imread("./../test1.png");
       
         Mat distortion = src.clone();
         Mat camera_matrix;
         Mat distortion_coefficients;
         imshow("src",src);
-        FileStorage file_storage("./../camera.yaml", FileStorage::READ);
+        FileStorage file_storage("./../camera1.yaml", FileStorage::READ);
         if(!file_storage.isOpened())
         {
             cerr << "open yaml failed."<< endl;
@@ -31,6 +31,7 @@ int main()
         undistort(src, distortion, camera_matrix, distortion_coefficients);
         
         imshow("undistort",distortion);
+        imwrite("undistort.png",distortion);
         waitKey(0);
         
         return 0;

@@ -5,8 +5,8 @@
 
 #include <linux/videodev2.h>
 
-#define S1030 
-//#define D1000
+//#define S1030 
+#define D1000
 
 using namespace std;
 using namespace cv;
@@ -108,6 +108,7 @@ int main()
     {
         Mat raw;
         cap.read(raw);
+        cvtColor(raw,raw,CV_BGR2GRAY);
            
         // cv::Mat mat_dst = cv::Mat(raw.size(), CV_8UC1);
         // cv::cvtColor(raw, mat_dst, cv::COLOR_YUV2RGB_YUYV);
@@ -133,8 +134,8 @@ int main()
 
 
 #ifdef D1000
-        left = Mat(h,w/2,CV_8UC3);
-        right = Mat(h,w/2,CV_8UC3);
+        left = Mat(h,w/2,CV_8UC1);
+        right = Mat(h,w/2,CV_8UC1);
 
     //use ptr 
         //left frame 
@@ -160,8 +161,8 @@ int main()
         Mat depth(h_d,w_d,CV_16UC1);
         cap_depth.read(depth);
        // cout << depth <<endl;
-        imshow("depth",depth);
-        imshow("raw",raw);
+        //imshow("depth",depth);
+        //imshow("raw",raw);
 
 #endif 
 
@@ -187,30 +188,43 @@ int main()
     //save left frame single method 1
         if (key == 32 || key == 's')
         {
-            static int32_t count = 1;
-            stringstream ss;
-            ss << (count++) << ".png";
-            string filename = ss.str();
-            imwrite(filename,left);
-            cout << "save " << filename << endl;
+            static int32_t count = 0;
+            count++;
+            cout << count << endl;
+            stringstream ss_l,ss_r;
+            ss_l << "left" << (count) << ".png";
+            ss_r << "right" << (count) << ".png";
+            string lfilename = ss_l.str();
+            string rfilename = ss_r.str();
+            imwrite(lfilename,left);
+            imwrite(rfilename,right);
+            cout << "save " <<  lfilename << endl;
+            cout << "save " <<  rfilename << endl;
         }
 
     //save left frame single method 2 
             // if (key == 32 || key == 's' || key == 'S')
             // {     
-            //     static int32_t count = 1;     
+            //     static int32_t count = 0;     
             //     char l_name[20];
+            //     char r_name[20];
             //     ++count;
-            //     cout << count;
+            //     cout << count << endl;
             //     snprintf(l_name, sizeof(l_name), "left_%d.jpg", count);
+            //     snprintf(r_name, sizeof(r_name), "right_%d.jpg",count);
             //     imwrite(l_name, left);
+            //     imwrite(r_name, right);
             //     cout << "save " << l_name << endl;
+            //     cout << "save " << r_name << endl;
             // }
     
     
     //esc
           if( key == 27 || key == 'q' | key == 'Q' )
             {break;}
+
+
+
 
     }
 
