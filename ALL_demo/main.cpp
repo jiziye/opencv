@@ -261,28 +261,48 @@ int main(int argc, char** argv)
             cout<<vec<<endl;
         }
     }
-#else
-    //26.split
-    vector<Mat> mvbegin;
-    split(src1,mvbegin);
-    Mat src1_0 = mvbegin[0];
-   
-    cout<<sizeof(char)<<" "<<sizeof(int)<<" "<<sizeof(long)<<endl;
-    cout<<sizeof(char*)<<" "<<sizeof(int*)<<" "<<sizeof(long*)<<endl;
 
+    //25.addweighted 
+    vector<Mat> channels;
+    split(src1,channels);
+    
 
-    // int acWelcome[]={1,3,4,6,8};
-    // example(acWelcome);
-    // cout<<"%%%%%%"<<sizeof(acWelcome)<<endl;
-   
-   VideoCapture cap(0);
-    //Mat video_image;
-    while(char(waitKey(1))!= 'q')
-    {   
-        Mat video_image;
-        cap >> video_image;
-        imshow("video",video_image);
-    }
+    cout << channels.size() << endl;
+    Mat B_C = channels[0];
+    Mat G_C = channels[1];
+    Mat R_C = channels[2];
+
+    Mat dst;
+    addWeighted(B_C,0.5,G_C,0.5,0,dst);
+    imshow("addweighted",dst);
+
+    //26.split and merge
+    vector<Mat> channels;
+    split(src1,channels);
+    
+
+    cout << channels.size() << endl;
+    // Mat B_C = channels[0];
+    // Mat G_C = channels[1];
+    // Mat R_C = channels[2];
+
+    Mat B_C = channels.at(0);
+    Mat G_C = channels.at(1);
+    Mat R_C = channels.at(2);
+
+    Mat dst;
+    merge(channels,dst);
+
+    imshow("B",B_C);
+    imshow("G",G_C);
+    imshow("R",R_C);
+    imshow("merge_image",dst);
+ #else   
+    // cout<<sizeof(char)<<" "<<sizeof(int)<<" "<<sizeof(long)<<endl;
+    // cout<<sizeof(char*)<<" "<<sizeof(int*)<<" "<<sizeof(long*)<<endl;
+
+    
+    
 
 #endif
     waitKey(0);

@@ -35,7 +35,7 @@ int main()
 
 #ifdef D1000
     VideoCapture cap_depth;
-    cap_depth.open(2);
+    //cap_depth.open(2);
 
     if (!cap.isOpened() && !cap_depth.isOpened())
     {
@@ -47,8 +47,8 @@ int main()
 
     cap.set(CV_CAP_PROP_FRAME_WIDTH,2560);
     cap.set(CV_CAP_PROP_FRAME_HEIGHT,720);
-    cap_depth.set(CV_CAP_PROP_FRAME_WIDTH,1280);
-    cap_depth.set(CV_CAP_PROP_FRAME_HEIGHT,720);
+    // cap_depth.set(CV_CAP_PROP_FRAME_WIDTH,1280);
+    // cap_depth.set(CV_CAP_PROP_FRAME_HEIGHT,720);
 #endif
 
     //frame 
@@ -63,12 +63,12 @@ int main()
 
 #ifdef D1000
     //depth
-    int w_d = cap_depth.get(CV_CAP_PROP_FRAME_WIDTH);
-    int h_d = cap_depth.get(CV_CAP_PROP_FRAME_HEIGHT);
+    // int w_d = cap_depth.get(CV_CAP_PROP_FRAME_WIDTH);
+    // int h_d = cap_depth.get(CV_CAP_PROP_FRAME_HEIGHT);
 
 
-    cout <<  "cap get depth width * height =  " << w_d  << " x "  
-         <<  h_d << endl;
+    // cout <<  "cap get depth width * height =  " << w_d  << " x "  
+    //      <<  h_d << endl;
 #endif
 
     // switch (mode)
@@ -108,7 +108,7 @@ int main()
     {
         Mat raw;
         cap.read(raw);
-        cvtColor(raw,raw,CV_BGR2GRAY);
+       
            
         // cv::Mat mat_dst = cv::Mat(raw.size(), CV_8UC1);
         // cv::cvtColor(raw, mat_dst, cv::COLOR_YUV2RGB_YUYV);
@@ -134,6 +134,7 @@ int main()
 
 
 #ifdef D1000
+        cvtColor(raw,raw,CV_BGR2GRAY);
         left = Mat(h,w/2,CV_8UC1);
         right = Mat(h,w/2,CV_8UC1);
 
@@ -158,8 +159,8 @@ int main()
         left = raw(Rect(0,0,w/2,h));
         right = raw(Rect(w/2,0,w/2,h));
 
-        Mat depth(h_d,w_d,CV_16UC1);
-        cap_depth.read(depth);
+        // Mat depth(h_d,w_d,CV_16UC1);
+        // cap_depth.read(depth);
        // cout << depth <<endl;
         //imshow("depth",depth);
         //imshow("raw",raw);
