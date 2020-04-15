@@ -1,6 +1,7 @@
 #include<opencv2/core/core.hpp>
 #include<opencv2/highgui/highgui.hpp>
 #include<opencv2/imgproc/imgproc.hpp>
+#include<opencv2/opencv.hpp>
 
 #include<iostream>
  
@@ -9,10 +10,11 @@ using namespace cv;
  
 int main()
 {
-	Mat srcImg = imread("panda.jpg");
+	Mat srcImg = imread("./../../panda.jpg");
 	if (!srcImg.data)
 	{
 		//printf("could not load image....\n");
+		cerr<<"load image error"<<endl;
 		return -1;
 	}
 	imshow("input image", srcImg);
@@ -30,7 +32,7 @@ int main()
 	int dims = srcImg.channels();
  
 	//初始化定义
-	int sampleCount = width*height;
+	int sampleCount = width * height;
 	int clusterCount = 3;
 	Mat points(sampleCount, dims, CV_32FC1, Scalar(10));
 	Mat labels;
@@ -43,7 +45,7 @@ int main()
 	{
 		for (int col = 0; col < srcImg.cols; col++)
 		{
-			index = row*width + col;        //转到一维
+			index = row * width + col;        //转到一维
 			Vec3b bgr = srcImg.at<Vec3b>(row, col);
 			points.at<float>(index, 0) = static_cast<int>(bgr[0]);
 			points.at<float>(index, 1) = static_cast<int>(bgr[1]);
@@ -62,7 +64,7 @@ int main()
 	{
 		for (int col = 0; col < srcImg.cols; col++)
 		{		
-			index = row*width + col;
+			index = row * width + col;
             int label = labels.at<int>(index);
  
 	//		Vec3b bgr = result.at<Vec3b>(row, col);  
@@ -80,7 +82,3 @@ int main()
 	waitKey(0);
 	return 0;
 }
-
-// ————————————————
-// 版权声明：本文为CSDN博主「黑夜奔跑」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-// 原文链接：https://blog.csdn.net/CJ_035/article/details/81805315

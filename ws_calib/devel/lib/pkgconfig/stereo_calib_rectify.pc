@@ -1,0 +1,8 @@
+prefix=/home/jiziye/opencv-demo/ws_calib/devel
+
+Name: stereo_calib_rectify
+Description: Description of stereo_calib_rectify
+Version: 0.0.0
+Cflags: -I/home/jiziye/opencv-demo/ws_calib/src/stereo_calib_rectify/include
+Libs: -L${prefix}/lib -lstereo_calib_rectify_nodelet
+Requires: cv_bridge dynamic_reconfigure geometry_msgs image_geometry image_transport message_filters nodelet roscpp rospy sensor_msgs std_msgs std_srvs
