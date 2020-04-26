@@ -73,17 +73,12 @@ void onMouse(int event, int x, int y,int flags, void* param)
 
 
 
-
-void example(int acWelcome[]){
-    cout<<sizeof(acWelcome)<<endl;
-    return;
-}
-
-
+//program start
 int main(int argc, char** argv)
 {   
     //2.
-    src1 = imread("./../logo.jpg");
+    src1 = imread("./../scene.jpg");
+    //.out must run below the ./build path 
     imshow("src1",src1);
    
 #if 0
@@ -297,13 +292,29 @@ int main(int argc, char** argv)
     imshow("G",G_C);
     imshow("R",R_C);
     imshow("merge_image",dst);
- #else   
-    // cout<<sizeof(char)<<" "<<sizeof(int)<<" "<<sizeof(long)<<endl;
-    // cout<<sizeof(char*)<<" "<<sizeof(int*)<<" "<<sizeof(long*)<<endl;
+  
+    //27.g(x)= a*f(x) + b  | a:gain,contrast   b:bias,brightness
+
+    Mat g_dstImage = Mat::zeros(src1.size(),src1.type()); 
+    // must init dstimage with same type and size,otherwise error;
+   
+    for (int i = 0; i < src1.rows; i++)
+    {
+         for(int j = 0; j < src1.cols; j++)
+        {
+            for(int c = 0; c < 3; c++)
+            {
+                g_dstImage.at<Vec3b>(i,j)[c] = saturate_cast<uchar>( 0.8 * src1.at<Vec3b>(i,j)[c] + 50);
+            }
+        }
+    }    
+
+    imshow("result", g_dstImage);
+
+#else 
+    //28
 
     
-    
-
 #endif
     waitKey(0);
     return 0;
