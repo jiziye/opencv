@@ -2,6 +2,7 @@
 #include <opencv2/video/video.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/videoio/videoio.hpp>
+#include <opencv2/opencv.hpp>
 
 #include <linux/videodev2.h>
 
@@ -108,7 +109,9 @@ int main()
     {
         Mat raw;
         cap.read(raw);
-       
+        //imshow("raw",raw);
+
+
            
         // cv::Mat mat_dst = cv::Mat(raw.size(), CV_8UC1);
         // cv::cvtColor(raw, mat_dst, cv::COLOR_YUV2RGB_YUYV);
@@ -134,12 +137,18 @@ int main()
 
 
 #ifdef D1000
-        cvtColor(raw,raw,CV_BGR2GRAY);
-        left = Mat(h,w/2,CV_8UC1);
-        right = Mat(h,w/2,CV_8UC1);
+        //color image
+        left = Mat(h, w/2, CV_8UC3);
+        right = Mat(h, w/2, CV_8UC3);
+    
+    
+        //gray image
+        // cvtColor(raw,raw,CV_BGR2GRAY);
+        // left = Mat(h,w/2,CV_8UC1);
+        // right = Mat(h,w/2,CV_8UC1);
 
-    //use ptr 
-        //left frame 
+        //use ptr 
+        // //left frame 
         // for (int i = 0; i < h ; i++)
         // {
         //     uchar *ptr = raw.ptr<uchar> (i);
@@ -155,13 +164,37 @@ int main()
         //     right.ptr<uchar>(i) [j] = ptr[j];
         // }
         
-    //use ROI
-        left = raw(Rect(0,0,w/2,h));
-        right = raw(Rect(w/2,0,w/2,h));
 
+        //use ROI   
+
+        //use color image,only use width and height,don't need to consider channel
+        left = raw(Rect(0, 0, w/2, h ));
+        right = raw(Rect(w / 2, 0, w/2, h));
+        
+
+        //use gray image
+        // left = raw(Rect(0,0,w/2,h));
+        // right = raw(Rect(w/2,0,w/2 ,h));
+ 
+
+    //use left image to dectect pedestrian
+        vector<Rect> found;
+
+        HOGDescriptor defaultHog;
+        defaultHog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());
+        defaultHog.detectMultiScale(left,found);
+
+        for (int i = 0; i < found.size();i++)
+        {
+            Rect r = found[i];
+            rectangle(left,r,Scalar(0,0,255));
+
+        }
+
+        
         // Mat depth(h_d,w_d,CV_16UC1);
         // cap_depth.read(depth);
-       // cout << depth <<endl;
+        // cout << depth <<endl;
         //imshow("depth",depth);
         //imshow("raw",raw);
 
@@ -171,7 +204,8 @@ int main()
         imshow("right", right);
 
 
-        char key = static_cast<char>(waitKey(1));
+
+    char key = static_cast<char>(waitKey(1));
               
     //save left frame persistently since enter 's'
     // //bug  
@@ -221,6 +255,7 @@ int main()
     
     
     //esc
+         // char key = static_cast<char>(waitKey(1));
           if( key == 27 || key == 'q' | key == 'Q' )
             {break;}
 
