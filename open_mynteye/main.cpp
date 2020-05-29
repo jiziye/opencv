@@ -202,8 +202,9 @@ int main()
 
         imshow("left", left);
         imshow("right", right);
-
-
+        Mat image_all;
+        hconcat(left,right,image_all);
+        imshow("left+right",image_all);
 
     char key = static_cast<char>(waitKey(1));
               
