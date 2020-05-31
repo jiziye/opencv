@@ -15,7 +15,7 @@ Mat g_srcImage,g_dstImage;
 
 
 int main() {
-    g_srcImage = imread("scene.jpg");
+    g_srcImage = imread("./../scene.jpg");
     cout << "g_srcImage.data: " << (long*)g_srcImage.data << endl;
 
     if (g_srcImage.empty()) {
