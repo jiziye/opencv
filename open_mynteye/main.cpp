@@ -137,11 +137,12 @@ int main()
 
 
 #ifdef D1000
-        //color image
-        left = Mat(h, w/2, CV_8UC3);
-        right = Mat(h, w/2, CV_8UC3);
-    
-    
+        //color image(1280*720 * 2)
+        // left = Mat(h, w/2, CV_8UC3);
+        // right = Mat(h, w/2, CV_8UC3);
+        const int w1 = 720;    
+        left = Mat(h, w1, CV_8UC3);
+        right = Mat(h, w1, CV_8UC3);
         //gray image
         // cvtColor(raw,raw,CV_BGR2GRAY);
         // left = Mat(h,w/2,CV_8UC1);
@@ -168,8 +169,8 @@ int main()
         //use ROI   
 
         //use color image,only use width and height,don't need to consider channel
-        left = raw(Rect(0, 0, w/2, h ));
-        right = raw(Rect(w / 2, 0, w/2, h));
+        left = raw(Rect((w/4-w1/2), 0, (w/4+ w1/2), h));
+        right = raw(Rect((3*w/4 - w1/2), 0, (3 * w /4 + w1 /2), h));
         
 
         //use gray image
@@ -199,11 +200,14 @@ int main()
         //imshow("raw",raw);
 
 #endif 
-
+        Size size1(480, 480);
+        // resize(left,left,size1);
+        // resize(right,right,size1);
         imshow("left", left);
         imshow("right", right);
-
-
+        Mat image_all;
+        // hconcat(left,right,image_all);
+        // imshow("left+right",image_all);
 
     char key = static_cast<char>(waitKey(1));
               

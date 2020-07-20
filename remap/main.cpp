@@ -26,9 +26,11 @@ int main() {
 
             }
         }
-
+        
         remap(src,dst,map_x,map_y,CV_INTER_LINEAR,BORDER_CONSTANT,Scalar(0,0,0));
         imshow("result",dst);
+        std::cout << map_x;
+        imshow("map-x",map_x);
         waitKey(0);
         //        std::cout << "Hello, World!" << std::endl;
     return 0;
