@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jiziye/git_project/opencv-demo/watermeter_rec/main2.cpp
+iostream
+-
+opencv2/opencv.hpp
+-
+opencv2/core/core.hpp
+-
+tesseract/baseapi.h
+-
+leptonica/allheaders.h
+-
+

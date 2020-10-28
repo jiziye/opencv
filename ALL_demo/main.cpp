@@ -77,7 +77,9 @@ void onMouse(int event, int x, int y,int flags, void* param)
 int main(int argc, char** argv)
 {   
     //2.
-    src1 = imread("./../scene.jpg");
+    src1 = imread("./../desk.jpg");
+    if(src1.empty())
+    cerr<<"read image error"<<endl;
     //.out must run below the ./build path 
     imshow("src1",src1);
    
@@ -134,10 +136,6 @@ int main(int argc, char** argv)
     printf("test. \n");
     printf("\t %d",100);
    // getchar();
-
-   
-
- 
 
     //15
     // Mat rgba(100,100,CV_8UC4,Scalar(1,2,3,4));

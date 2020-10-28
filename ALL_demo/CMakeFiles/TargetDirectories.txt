@@ -1,0 +1,3 @@
+/home/jiziye/git_project/opencv-demo/ALL_demo/CMakeFiles/rebuild_cache.dir
+/home/jiziye/git_project/opencv-demo/ALL_demo/CMakeFiles/all_demo.dir
+/home/jiziye/git_project/opencv-demo/ALL_demo/CMakeFiles/edit_cache.dir

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jiziye/git_project/opencv-demo/ALL_demo/main.cpp
+iostream
+-
+opencv2/core/core.hpp
+-
+opencv2/opencv.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+opencv2/imgproc/imgproc.hpp
+-
+opencv2/ml/ml.hpp
+-
+

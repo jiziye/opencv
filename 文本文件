@@ -1,0 +1,10 @@
+ 
+## 使用g++编译写好的opencv代码
+gcc 和 g++分别是GNU的C&C++编译器，编译过程可分为四步：
+1.预处理：生成.i 文件。
+2.将预处理的文件转换成汇编语言，生成文件.s
+3.由汇编变成目标代码（机器代码）生成.o文件
+4.连接目标代码，生成可执行程序
+
+## 命令示例
+g++ `pkg-config opencv --cflags` data.cpp  -o data `pkg-config opencv --libs` 
